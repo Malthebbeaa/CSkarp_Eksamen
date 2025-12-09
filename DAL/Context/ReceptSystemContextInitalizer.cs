@@ -7,7 +7,7 @@ public class ReceptSystemContextInitalizer
     public static void Seed(ReceptSystemContext context)
     {
 
-        context.Database.EnsureDeleted();
+        //context.Database.EnsureDeleted();
         context.Database.EnsureCreated();
         /*
          * public DbSet<Recept> Recepter {get;set;}
@@ -51,7 +51,9 @@ public class ReceptSystemContextInitalizer
                     PatientCpr = "2010035647",
                     Ordinationer = new List<Ordination>()
                     {
-                        new Ordination(){AntalUdleveringer = 3, OrdinationId = Guid.NewGuid(), AntalForetagedeUdleveringer = 0, Lægemiddel = "2 tabletter 3 gange dagligt"}
+                        new Ordination(){AntalUdleveringer = 3, OrdinationId = Guid.NewGuid(), AntalForetagedeUdleveringer = 0, Lægemiddel = "2 tabletter 3 gange dagligt"},
+                        new Ordination(){AntalUdleveringer = 5, OrdinationId = Guid.NewGuid(), AntalForetagedeUdleveringer = 0, Lægemiddel = "3 tabletter 1 gange dagligt"}
+
                     }
                 },
                 new Recept()
@@ -72,7 +74,7 @@ public class ReceptSystemContextInitalizer
                     OprettelsesDato = DateTime.Now.AddDays(1),
                     Lukket = false,
                     ReceptUdleveringer = new List<ReceptUdlevering>(),
-                    PatientCpr = "3050035643",
+                    PatientCpr = "3005035643",
                     Ordinationer = new List<Ordination>()
                     {
                         new Ordination(){AntalUdleveringer = 3, OrdinationId = Guid.NewGuid(), AntalForetagedeUdleveringer = 0, Lægemiddel = "1 tabletter 5 gange dagligt"}

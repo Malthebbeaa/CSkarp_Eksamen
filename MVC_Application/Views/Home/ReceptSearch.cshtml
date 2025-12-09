@@ -2,8 +2,8 @@
 
 @{
     ViewData["Title"] = "Home Page";
-    var cpr = (string) ViewBag.Cpr;
-    var apotekId = (Guid) ViewBag.Apotek.ApotekId;
+    var cpr = (string)ViewBag.Cpr;
+    var apotekId = (Guid)ViewBag.Apotek.ApotekId;
 }
 
 <div style="text-align:center; margin-top:20px;">
@@ -14,68 +14,96 @@
         <p style="margin-bottom:20px;">
             <label style="font-weight:bold;">
                 Cprnummer:
-                <input type="text" name="cpr"/>
+                <input type="text" name="cpr" style="margin-left:10px; padding:4px;" />
             </label>
-            <input type="submit" value="Hent"/>
+            <input type="submit" value="Hent" style="margin-left:10px; padding:4px 10px;" />
         </p>
     }
 
     <h2>Recepter for @ViewBag.Apotek.Navn</h2>
-    <h3>Patient Cpr: @cpr</h3>
-    <table style="
-        margin: 0 auto;
-        border-collapse: collapse;
-        width: 70%;
-        text-align: center;
-        font-size: 18px;
-    ">
-        <tr style="background-color:#f2f2f2;">
-            <th style="padding:12px; border:1px solid #ddd;">CPR</th>
-            <th style="padding:12px; border:1px solid #ddd;">Lægehus Ydernummer</th>
-            <th style="padding:12px; border:1px solid #ddd;">Oprettelsesdato</th>
-            <th style="padding:12px; border:1px solid #ddd">Lægemiddel</th>
-            <th style="padding:12px; border:1px solid #ddd">Mulige udleveringer</th>
-            <th style="padding:12px; border:1px solid #ddd">Foretagede udleveringer</th>
-            <th></th>
-        </tr>
+    <h3>Patient CPR: @cpr</h3>
 
-        @if (Model != null)
+    @if (Model != null && Model.Any())
+    {
+        @foreach (var recept in Model)
         {
-            foreach (var recept in Model)
-            {
-                <tr>
-                    <td style="padding:10px; border:1px solid #ddd;">@recept.PatientCpr</td>
-                    <td style="padding:10px; border:1px solid #ddd;">@recept.LægehusId</td>
-                    <td style="padding:10px; border:1px solid #ddd;">@recept.OprettelsesDato.ToString()</td>
-                    <td style="padding:10px; border:1px solid #ddd;">
-                        @recept.Ordinationer.FirstOrDefault()?.Lægemiddel
-                    </td>
-                    <td style="padding:10px; border:1px solid #ddd;">
-                        @recept.Ordinationer.FirstOrDefault()?.AntalUdleveringer
-                    </td>
-                    <td style="padding:10px; border:1px solid #ddd;">
-                        @recept.Ordinationer.FirstOrDefault()?.AntalForetagedeUdleveringer
-                    </td>
-                    <td>@using (Html.BeginForm("ForetagUdlevering", "Home", FormMethod.Post))
+            <div style="
+                border: 1px solid #ccc;
+                border-radius: 8px;
+                padding: 15px 20px;
+                margin: 20px auto;
+                width: 80%;
+                text-align: left;
+                box-shadow: 0 0 5px rgba(0,0,0,0.05);
+            ">
+                <h4 style="margin-top:0; margin-bottom:10px;">Recept: @recept.ReceptId</h4>
+
+                <div style="margin-bottom:10px; line-height:1.6;">
+                    <div><strong>CPR:</strong> @recept.PatientCpr</div>
+                    <div><strong>Lægehus Ydernummer:</strong> @recept.LægehusId</div>
+                    <div><strong>Oprettelsesdato:</strong> @recept.OprettelsesDato.ToString("D")</div>
+                </div>
+
+                <table style="
+                    margin: 10px auto 0 auto;
+                    border-collapse: collapse;
+                    width: 100%;
+                    text-align: center;
+                    font-size: 16px;
+                ">
+                    <tr style="background-color:#f2f2f2;">
+                        <th style="padding:10px; border:1px solid #ddd;">Lægemiddel</th>
+                        <th style="padding:10px; border:1px solid #ddd;">Mulige udleveringer</th>
+                        <th style="padding:10px; border:1px solid #ddd;">Foretagede udleveringer</th>
+                        <th style="padding:10px; border:1px solid #ddd;">Handling</th>
+                    </tr>
+
+                    @if (recept.Ordinationer != null && recept.Ordinationer.Any())
                     {
-                        @Html.Hidden("cpr", cpr)
-                        @Html.Hidden("apotekId", apotekId)
-                        @Html.Hidden("receptId", recept.ReceptId)
-                        @Html.Hidden("ordinationId", recept.Ordinationer.First().OrdinationId)
-                        <button type="submit" onclick="return confirm('Er du sikker?')">Foretag Udlevering</button>
+                        @foreach (var ordination in recept.Ordinationer)
+                        {
+                            <tr>
+                                <td style="padding:8px; border:1px solid #ddd;">@ordination.Lægemiddel</td>
+                                <td style="padding:8px; border:1px solid #ddd;">@ordination.AntalUdleveringer</td>
+                                <td style="padding:8px; border:1px solid #ddd;">@ordination.AntalForetagedeUdleveringer</td>
+                                <td style="padding:8px; border:1px solid #ddd;">
+                                    @using (Html.BeginForm("ForetagUdlevering", "Home", FormMethod.Post))
+                                    {
+                                        @Html.Hidden("cpr", cpr)
+                                        @Html.Hidden("apotekId", apotekId)
+                                        @Html.Hidden("receptId", recept.ReceptId)
+                                        @Html.Hidden("ordinationId", ordination.OrdinationId)
+                                        @if (ordination.AntalUdleveringer == ordination.AntalForetagedeUdleveringer)
+                                        {
+                                            <p style="color: red">Ordinationen er lukket</p>
+                                        }
+                                        else
+                                        {
+                                            <button type="submit"
+                                                    onclick="return confirm('Er du sikker?')"
+                                                    style="padding:4px 8px;">
+                                                Foretag udlevering
+                                            </button>
+                                        }
+                                    }
+                                </td>
+                            </tr>
+                        }
                     }
-                    </td>
-                </tr>
-            }
+                    else
+                    {
+                        <tr>
+                            <td colspan="4" style="padding:10px; border:1px solid #ddd; font-style:italic;">
+                                Ingen ordinationer på denne recept
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
         }
-        else
-        {
-            <tr>
-                <td colspan="7" style="padding:12px; border:1px solid #ddd; font-style:italic;">
-                    Ingen data fundet
-                </td>
-            </tr>
-        }
-    </table>
-
+    }
+    else
+    {
+        <h5>Ingen recepter fundet.</h5>
+    }
 </div>
