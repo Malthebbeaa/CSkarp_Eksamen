@@ -79,6 +79,7 @@ public class Mapper
         {
             OrdinationId = ordination.OrdinationId,
             Lægemiddel = ordination.Lægemiddel,
+            Dosis = ordination.Dosis,
             AntalUdleveringer = ordination.AntalUdleveringer,
             AntalForetagedeUdleveringer = ordination.AntalForetagedeUdleveringer
         };
@@ -89,6 +90,7 @@ public class Mapper
         {
             OrdinationId = ordinationDto.OrdinationId,
             Lægemiddel = ordinationDto.Lægemiddel,
+            Dosis = ordinationDto.Dosis,
             AntalUdleveringer = ordinationDto.AntalUdleveringer,
             AntalForetagedeUdleveringer = ordinationDto.AntalForetagedeUdleveringer
         };

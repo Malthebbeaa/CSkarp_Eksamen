@@ -51,8 +51,8 @@ public class ReceptSystemContextInitalizer
                     PatientCpr = "2010035647",
                     Ordinationer = new List<Ordination>()
                     {
-                        new Ordination(){AntalUdleveringer = 3, OrdinationId = Guid.NewGuid(), AntalForetagedeUdleveringer = 0, Lægemiddel = "2 tabletter 3 gange dagligt"},
-                        new Ordination(){AntalUdleveringer = 5, OrdinationId = Guid.NewGuid(), AntalForetagedeUdleveringer = 0, Lægemiddel = "3 tabletter 1 gange dagligt"}
+                        new Ordination(){AntalUdleveringer = 3, OrdinationId = Guid.NewGuid(), AntalForetagedeUdleveringer = 0, Lægemiddel = "Panodil",Dosis = "2 tabletter 3 gange dagligt"},
+                        new Ordination(){AntalUdleveringer = 5, OrdinationId = Guid.NewGuid(), AntalForetagedeUdleveringer = 0, Lægemiddel = "Penicillin",Dosis = "3 tabletter 1 gange dagligt"}
 
                     }
                 },
@@ -65,7 +65,7 @@ public class ReceptSystemContextInitalizer
                     PatientCpr = "2010035647",
                     Ordinationer = new List<Ordination>()
                     {
-                        new Ordination(){AntalUdleveringer = 3, OrdinationId = Guid.NewGuid(), AntalForetagedeUdleveringer = 0, Lægemiddel = "3 tabletter 2 gange dagligt"}
+                        new Ordination(){AntalUdleveringer = 3, OrdinationId = Guid.NewGuid(), AntalForetagedeUdleveringer = 0, Lægemiddel = "Panodil", Dosis = "3 tabletter 2 gange dagligt"}
                     }
                 },
                 new Recept()
@@ -77,7 +77,7 @@ public class ReceptSystemContextInitalizer
                     PatientCpr = "3005035643",
                     Ordinationer = new List<Ordination>()
                     {
-                        new Ordination(){AntalUdleveringer = 3, OrdinationId = Guid.NewGuid(), AntalForetagedeUdleveringer = 0, Lægemiddel = "1 tabletter 5 gange dagligt"}
+                        new Ordination(){AntalUdleveringer = 3, OrdinationId = Guid.NewGuid(), AntalForetagedeUdleveringer = 0, Lægemiddel = "Pinex",Dosis = "1 tabletter 5 gange dagligt"}
                     }
                 }
                 );

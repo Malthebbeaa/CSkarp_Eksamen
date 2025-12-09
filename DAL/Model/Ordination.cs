@@ -4,11 +4,13 @@ namespace DAL.Model;
 
 public class Ordination
 {
-    [Key]
-    public Guid OrdinationId { get; set; }
+    [Key] public Guid OrdinationId { get; set; }
     public string Lægemiddel { get; set; }
+    public string Dosis { get; set; }
     public int AntalUdleveringer { get; set; }
     public int AntalForetagedeUdleveringer { get; set; }
-    
-    public Ordination(){}
+
+    public Ordination()
+    {
+    }
 }
