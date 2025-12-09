@@ -7,7 +7,7 @@ public class ReceptSystemContextInitalizer
     public static void Seed(ReceptSystemContext context)
     {
 
-        //context.Database.EnsureDeleted();
+        context.Database.EnsureDeleted();
         context.Database.EnsureCreated();
         /*
          * public DbSet<Recept> Recepter {get;set;}
@@ -18,9 +18,9 @@ public class ReceptSystemContextInitalizer
         if (!context.Lægehuse.Any())
         {
             context.Lægehuse.AddRange(
-                new Lægehus(){Ydernummer = Guid.NewGuid(), Navn = "Viby Lægehus"},
-                new Lægehus(){Ydernummer = Guid.NewGuid(), Navn = "Aarhus Lægehus"},
-                new Lægehus(){Ydernummer = Guid.NewGuid(), Navn = "Højbjerg Lægehus"}
+                new Lægehus(){Ydernummer = 100001, Navn = "Viby Lægehus"},
+                new Lægehus(){Ydernummer = 100002, Navn = "Aarhus Lægehus"},
+                new Lægehus(){Ydernummer = 100003, Navn = "Højbjerg Lægehus"}
                 );
             
             context.SaveChanges();

@@ -1,3 +1,4 @@
+using DTO;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ReceptSystemAPI.Controllers;
@@ -29,7 +30,7 @@ public class ReceptSystemController: ControllerBase
     }
 
     [HttpGet("laegehuse/{ydernummer}")]
-    public IActionResult GetLægehus(Guid ydernummer)
+    public IActionResult GetLægehus(int ydernummer)
     {
         var lægehus = _lægehusBll.GetLægehus(ydernummer);
         return Ok(lægehus);
@@ -61,6 +62,12 @@ public class ReceptSystemController: ControllerBase
     {
         var recept = _receptBll.GetRecept(id);
         return Ok(recept);
+    }
+
+    [HttpPost("recepter")]
+    public IActionResult CreateRecept([FromBody] ReceptDTO recept)
+    {
+        return Ok();
     }
     
     [HttpGet("ordinationer")]

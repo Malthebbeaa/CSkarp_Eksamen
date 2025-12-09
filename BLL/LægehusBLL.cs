@@ -13,7 +13,7 @@ public class LægehusBLL
         _repository = repository;
     }
 
-    public LægehusDTO? GetLægehus(Guid lægehusYdernummer)
+    public LægehusDTO? GetLægehus(int lægehusYdernummer)
     {
         var lægehus = _repository.GetLægehus(lægehusYdernummer);
         if (lægehus == null) return null;

@@ -13,7 +13,7 @@ public class LægehusRepository
         _context = context;
     }
 
-    public Lægehus? GetLægehus(Guid ydernummer)
+    public Lægehus? GetLægehus(int ydernummer)
     {
         return _context
             .Lægehuse

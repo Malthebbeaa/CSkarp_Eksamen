@@ -39,9 +39,8 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("DAL.Model.Lægehus", b =>
                 {
-                    b.Property<Guid>("Ydernummer")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("Ydernummer")
+                        .HasColumnType("int");
 
                     b.Property<string>("Navn")
                         .IsRequired()
@@ -91,8 +90,8 @@ namespace DAL.Migrations
                     b.Property<bool>("Lukket")
                         .HasColumnType("bit");
 
-                    b.Property<Guid>("LægehusYdernummer")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("LægehusYdernummer")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("OprettelsesDato")
                         .HasColumnType("datetime2");

@@ -11,4 +11,11 @@ public class ReceptSystemContext: DbContext
     public DbSet<Lægehus> Lægehuse { get; set; }
     public DbSet<Ordination> Ordinationer { get; set; }
     public DbSet<ReceptUdlevering> ReceptUdleveringer { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Lægehus>()
+            .Property(l => l.Ydernummer)
+            .ValueGeneratedNever();
+    }
 }

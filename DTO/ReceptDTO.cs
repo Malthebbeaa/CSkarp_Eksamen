@@ -8,7 +8,7 @@ public class ReceptDTO
     public string PatientCpr { get; set; }
     public DateTime OprettelsesDato { get; set; }
     public bool Lukket { get; set; }
-    public Guid LægehusId { get; set; }
+    public int LægehusId { get; set; }
     public List<OrdinationDTO> Ordinationer { get; set; }
     public List<ReceptUdleveringDTO> ReceptUdleveringer { get; set; }
 }
