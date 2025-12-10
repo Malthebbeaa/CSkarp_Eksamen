@@ -5,28 +5,43 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Desktop_Application.OpretOrdinationWindow"
         Title="OpretOrdinationWindow">
-    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="25">
+        <TextBlock FontSize="46">Opret Ordination</TextBlock>
         <StackPanel Orientation="Horizontal">
             <Label>Lægemiddel</Label>
             <TextBox 
                 x:Name="Lægemiddel"
-                TextChanged="Lægemiddel_OnTextChanged"></TextBox>
+                TextChanged="Lægemiddel_OnTextChanged"
+                Width="250"
+                Watermark="Panodil"></TextBox>
+            <TextBlock x:Name="FejlLægemiddel" Foreground="Red" IsVisible="True">*Angiv lægemiddel</TextBlock>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             <Label>Dosis</Label>
             <TextBox 
                 x:Name="Dosis"
-                TextChanged="Dosis_OnTextChanged"></TextBox>
+                TextChanged="Dosis_OnTextChanged"
+                Width="250"
+                Watermark="2 tabletter 3 gange dagligt"></TextBox>
+            <TextBlock x:Name="FejlDosis" Foreground="Red" IsVisible="True">*Angiv dosis</TextBlock>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             <Label>Antal Udleveringer</Label>
             <TextBox 
                 x:Name="AntalUdleveringer"
-                TextChanged="AntalUdleveringer_OnTextChanged"></TextBox>
+                TextChanged="AntalUdleveringer_OnTextChanged"
+                Width="250"
+                Watermark="3"></TextBox>
+            <TextBlock x:Name="FejlAntal" Foreground="Red" IsVisible="True">*Angiv antal</TextBlock>
         </StackPanel>
-        <Button 
-            x:Name="TilføjOrdinationBtn" 
-            IsEnabled="False"
-            Click="TilføjOrdinationBtn_OnClick">Tilføj Ordination</Button>
+        <StackPanel Orientation="Horizontal" Spacing="10">
+            <Button 
+                x:Name="TilbageBtn"
+                Click="TilbageBtn_OnClick">Tilbage</Button>
+            <Button 
+                x:Name="TilføjOrdinationBtn" 
+                IsEnabled="False"
+                Click="TilføjOrdinationBtn_OnClick">Tilføj Ordination</Button>
+        </StackPanel>
     </StackPanel>
 </Window>

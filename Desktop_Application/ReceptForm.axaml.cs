@@ -16,7 +16,8 @@ namespace Desktop_Application;
 public partial class ReceptForm : Window
 {
     private LægehusDTO _lægehus;
-    private ObservableCollection<OrdinationDTO> _ordinationer = new ();
+    private ObservableCollection<OrdinationDTO> _ordinationer = new();
+
     public ReceptForm(LægehusDTO lægehus)
     {
         InitializeComponent();
@@ -45,21 +46,21 @@ public partial class ReceptForm : Window
             Ordinationer = _ordinationer.ToList(),
             ReceptUdleveringer = new List<ReceptUdleveringDTO>()
         };
-        
+
         HttpClient client = new HttpClient();
-        
+
         var json = JsonSerializer.Serialize(recept);
         var content = new StringContent(json, Encoding.UTF8, "application/json");
         var response = await client.PostAsync(
             $"http://localhost:5027/api/ReceptSystems/recepter",
             content
         );
-        
+
         if (!response.IsSuccessStatusCode)
         {
             Console.WriteLine("Fejl i POST");
         }
-        
+
         var mainWindow = new MainWindow();
         mainWindow.Show();
         this.Close();
@@ -81,16 +82,33 @@ public partial class ReceptForm : Window
 
     private void Cpr_OnTextChanged(object? sender, TextChangedEventArgs e)
     {
-        if (Cpr.Text.Length < 10)
+        var tb = sender as TextBox;
+
+        if (tb == null)
+            return;
+
+        string digitsOnly = new string(tb.Text.Where(char.IsDigit).ToArray());
+
+        if (tb.Text != digitsOnly)
         {
-            CprFejlBesked.IsVisible = true;
+            int caret = tb.CaretIndex;
+            tb.Text = digitsOnly;
+            tb.CaretIndex = Math.Min(caret, tb.Text.Length); // Behold cursorposition
         }
-        else if (Cpr.Text.Length == 10)
+
+
+        if (Cpr.Text.Length == 10)
         {
             CprFejlBesked.IsVisible = false;
         }
+        else
+        {
+            CprFejlBesked.IsVisible = true;
+        }
+
         OpretReceptBtn.IsEnabled = Cpr.Text.Length == 10 && _ordinationer.Count > 0;
     }
+
 
     private void Ordinationer_OnSizeChanged(object? sender, SizeChangedEventArgs e)
     {
@@ -102,6 +120,7 @@ public partial class ReceptForm : Window
         {
             ListFejlBesked.IsVisible = false;
         }
+
         OpretReceptBtn.IsEnabled = _ordinationer.Count > 0 && Cpr.Text.Length == 10;
     }
 }

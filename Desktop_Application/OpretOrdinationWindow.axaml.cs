@@ -33,28 +33,39 @@ public partial class OpretOrdinationWindow : Window
 
     private void Lægemiddel_OnTextChanged(object? sender, TextChangedEventArgs e)
     {
-        var lægemiddelUdfyldt = Lægemiddel.Text != null;
-        var dosisUdfyldt = Dosis.Text != null;
-        var antalUdfyldt = AntalUdleveringer.Text != null;
+        var lægemiddelUdfyldt = !string.IsNullOrWhiteSpace(Lægemiddel.Text);
+        var dosisUdfyldt = !string.IsNullOrWhiteSpace(Dosis.Text);
+        var antalUdfyldt = !string.IsNullOrWhiteSpace(AntalUdleveringer.Text);
+
+        FejlLægemiddel.IsVisible = !lægemiddelUdfyldt;
 
         TilføjOrdinationBtn.IsEnabled = lægemiddelUdfyldt && dosisUdfyldt && antalUdfyldt;
     }
 
     private void Dosis_OnTextChanged(object? sender, TextChangedEventArgs e)
     {
-        var lægemiddelUdfyldt = Lægemiddel.Text != null;
-        var dosisUdfyldt = Dosis.Text != null;
-        var antalUdfyldt = AntalUdleveringer.Text != null;
+        var lægemiddelUdfyldt = !string.IsNullOrWhiteSpace(Lægemiddel.Text);
+        var dosisUdfyldt = !string.IsNullOrWhiteSpace(Dosis.Text);
+        var antalUdfyldt = !string.IsNullOrWhiteSpace(AntalUdleveringer.Text);
+
+        FejlDosis.IsVisible = !dosisUdfyldt;
 
         TilføjOrdinationBtn.IsEnabled = lægemiddelUdfyldt && dosisUdfyldt && antalUdfyldt;
     }
 
     private void AntalUdleveringer_OnTextChanged(object? sender, TextChangedEventArgs e)
     {
-        var lægemiddelUdfyldt = Lægemiddel.Text != null;
-        var dosisUdfyldt = Dosis.Text != null;
-        var antalUdfyldt = AntalUdleveringer.Text != null;
+        var lægemiddelUdfyldt = !string.IsNullOrWhiteSpace(Lægemiddel.Text);
+        var dosisUdfyldt = !string.IsNullOrWhiteSpace(Dosis.Text);
+        var antalUdfyldt = !string.IsNullOrWhiteSpace(AntalUdleveringer.Text);
+
+        FejlAntal.IsVisible = !antalUdfyldt;
 
         TilføjOrdinationBtn.IsEnabled = lægemiddelUdfyldt && dosisUdfyldt && antalUdfyldt;
+    }
+
+    private void TilbageBtn_OnClick(object? sender, RoutedEventArgs e)
+    {
+        this.Close();
     }
 }
