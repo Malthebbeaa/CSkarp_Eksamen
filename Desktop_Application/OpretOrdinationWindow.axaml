@@ -1,0 +1,32 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="Desktop_Application.OpretOrdinationWindow"
+        Title="OpretOrdinationWindow">
+    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+        <StackPanel Orientation="Horizontal">
+            <Label>Lægemiddel</Label>
+            <TextBox 
+                x:Name="Lægemiddel"
+                TextChanged="Lægemiddel_OnTextChanged"></TextBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Label>Dosis</Label>
+            <TextBox 
+                x:Name="Dosis"
+                TextChanged="Dosis_OnTextChanged"></TextBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Label>Antal Udleveringer</Label>
+            <TextBox 
+                x:Name="AntalUdleveringer"
+                TextChanged="AntalUdleveringer_OnTextChanged"></TextBox>
+        </StackPanel>
+        <Button 
+            x:Name="TilføjOrdinationBtn" 
+            IsEnabled="False"
+            Click="TilføjOrdinationBtn_OnClick">Tilføj Ordination</Button>
+    </StackPanel>
+</Window>

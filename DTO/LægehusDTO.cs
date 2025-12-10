@@ -5,4 +5,8 @@ public class LægehusDTO
     public int Ydernummer { get; set; }
     public string Navn { get; set; }
     public List<ReceptDTO> Recepter { get; set; }
+    public override string ToString()
+    {
+        return $"{Navn} -  {Ydernummer}";
+    }
 }

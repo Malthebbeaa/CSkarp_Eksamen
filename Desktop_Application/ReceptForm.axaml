@@ -5,12 +5,31 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Desktop_Application.ReceptForm"
         Title="ReceptForm">
-    <StackPanel>
+    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="25">
+        <TextBlock x:Name="Lægehus"></TextBlock>
         <StackPanel Orientation="Horizontal">
             <Label>Patient Cpr: </Label>
-            <TextBox></TextBox>
+            <TextBox 
+                x:Name="Cpr" Width="200" MaxLength="10"
+                TextChanged="Cpr_OnTextChanged"></TextBox>
+            <TextBlock Foreground="Red" IsVisible="True" x:Name="CprFejlBesked">*CPR skal være 10 cifre</TextBlock>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <ListBox x:Name="Ordinationer"
+                     SizeChanged="Ordinationer_OnSizeChanged"></ListBox>
+            <TextBlock Foreground="Red" IsVisible="True" x:Name="ListFejlBesked">*Tilføj Ordination</TextBlock>
         </StackPanel>
         
-        <Button>Opret Recept</Button>
+        <Button 
+            x:Name="TilføjOrdinationBtn" 
+            Click="TilføjOrdinationBtn_OnClick"
+            Padding="10">Tilføj Ordination</Button>
+        <StackPanel Orientation="Horizontal" Spacing="10">
+            <Button Background="Crimson" Click="Button_OnClick">Tilbage</Button>
+            <Button 
+                x:Name="OpretReceptBtn" 
+                Click="OpretReceptBtn_OnClick"
+                IsEnabled="False">Opret Recept</Button>
+        </StackPanel>
     </StackPanel>
 </Window>

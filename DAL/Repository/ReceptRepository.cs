@@ -43,6 +43,12 @@ public class ReceptRepository
             .ToList();
     }
 
+    public Recept CreateRecept(Recept recept)
+    {
+        _context.Recepter.Add(recept);
+        _context.SaveChanges();
+        return recept;
+    }
     public bool Update(Recept recept)
     {
         _context.Recepter.Update(recept);

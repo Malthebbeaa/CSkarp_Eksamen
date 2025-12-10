@@ -48,7 +48,7 @@ public class HomeController : Controller
     public IActionResult Index()
     {
         HttpClient client = new HttpClient();
-        Task<string> response = client.GetStringAsync("http://localhost:5027/api/ReceptSystem/apoteker");
+        Task<string> response = client.GetStringAsync("http://localhost:5027/api/ReceptSystems/apoteker");
         
         string json = response.Result;
 
@@ -72,7 +72,7 @@ public class HomeController : Controller
     public async Task<ApotekDTO?> GetApotek(Guid apotekId)
     {
         HttpClient client = new HttpClient();
-        var response = await client.GetAsync($"http://localhost:5027/api/ReceptSystem/apoteker/{apotekId}");
+        var response = await client.GetAsync($"http://localhost:5027/api/ReceptSystems/apoteker/{apotekId}");
         
         if (!response.IsSuccessStatusCode)
         {

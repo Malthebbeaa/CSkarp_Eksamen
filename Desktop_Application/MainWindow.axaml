@@ -5,12 +5,19 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Desktop_Application.MainWindow"
         Title="Desktop_Application">
-    <StackPanel HorizontalAlignment="Center" Spacing="10">
+    <StackPanel 
+        HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10">
         <StackPanel Orientation="Horizontal" Spacing="10">
-            <Label>Lægehus' ydernummer:</Label>
-            <TextBox Width="250"></TextBox>
+            <Label>Lægehus ydernummer:</Label>
+            <TextBox Width="250" x:Name="Searchbar"></TextBox>
             <Button Click="Button_OnClick">Søg</Button>
         </StackPanel>
-        <ListBox x:Name="Huse"></ListBox>
+        <ListBox 
+            x:Name="Huse"
+            SelectionChanged="Huse_OnSelectionChanged"></ListBox>
+        <Button 
+            x:Name="OpretReceptBtn" 
+            IsVisible="False"
+            Click="OpretReceptBtn_OnClick">Opret Recept</Button>
     </StackPanel>
 </Window>

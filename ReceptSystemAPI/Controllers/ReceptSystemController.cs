@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace ReceptSystemAPI.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/[controller]s")]
 public class ReceptSystemController: ControllerBase
 {
     private readonly BLL.LægehusBLL _lægehusBll;
@@ -67,7 +67,8 @@ public class ReceptSystemController: ControllerBase
     [HttpPost("recepter")]
     public IActionResult CreateRecept([FromBody] ReceptDTO recept)
     {
-        return Ok();
+        var newRecept = _receptBll.CreateRecept(recept);
+        return Ok(newRecept);
     }
     
     [HttpGet("ordinationer")]

@@ -36,6 +36,13 @@ public class ReceptBLL
         return recepter.Select(Mapper.Map).ToList();
     }
 
+    public ReceptDTO CreateRecept(ReceptDTO recept)
+    {
+        var mappedReceptDto = Mapper.Map(recept);
+        var newRecept = _repository.CreateRecept(mappedReceptDto);
+        return Mapper.Map(newRecept);
+    }
+
     public bool ForetagReceptUdlevering(Guid receptId, Guid ordinationId, Guid apotekNr)
     {
         var recept = _repository.GetRecept(receptId);

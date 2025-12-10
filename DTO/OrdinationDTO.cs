@@ -7,4 +7,9 @@ public class OrdinationDTO
     public string Dosis { get; set; }
     public int AntalUdleveringer { get; set; }
     public int AntalForetagedeUdleveringer { get; set; }
+
+    public override string ToString()
+    {
+        return $"{Lægemiddel} -  {Dosis} - {AntalUdleveringer}";
+    }
 }
