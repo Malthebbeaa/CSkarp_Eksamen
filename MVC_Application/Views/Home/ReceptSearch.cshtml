@@ -67,7 +67,7 @@
                                 <td style="padding:8px; border:1px solid #ddd;">@ordination.Lægemiddel</td>
                                 <td style="padding:8px; border:1px solid #ddd;">@ordination.Dosis</td>
                                 <td style="padding:8px; border:1px solid #ddd;">@ordination.AntalUdleveringer</td>
-                                <td style="padding:8px; border:1px solid #ddd;">@ordination.AntalForetagedeUdleveringer</td>
+                                <td style="padding:8px; border:1px solid #ddd;">@ordination.AntalForetagneUdleveringer</td>
                                 <td style="padding:8px; border:1px solid #ddd;">
                                     @using (Html.BeginForm("ForetagUdlevering", "Home", FormMethod.Post))
                                     {
@@ -75,7 +75,7 @@
                                         @Html.Hidden("apotekId", apotekId)
                                         @Html.Hidden("receptId", recept.ReceptId)
                                         @Html.Hidden("ordinationId", ordination.OrdinationId)
-                                        @if (ordination.AntalUdleveringer == ordination.AntalForetagedeUdleveringer)
+                                        @if (ordination.AntalUdleveringer == ordination.AntalForetagneUdleveringer)
                                         {
                                             <p style="color: red">Ordinationen er lukket</p>
                                         }

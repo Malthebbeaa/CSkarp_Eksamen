@@ -54,9 +54,9 @@ public class ReceptBLL
         var apotek = _apotekRepository.GetApotek(apotekNr);
         if (apotek == null) return false;
         
-        ordinationToUpdate.AntalForetagedeUdleveringer++;
+        ordinationToUpdate.AntalForetagneUdleveringer++;
         
-        if (recept.Ordinationer.TrueForAll(o => o.AntalUdleveringer == o.AntalForetagedeUdleveringer))
+        if (recept.Ordinationer.TrueForAll(o => o.AntalUdleveringer == o.AntalForetagneUdleveringer))
         {
             recept.Lukket = true;
         }

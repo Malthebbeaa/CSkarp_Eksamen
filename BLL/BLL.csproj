@@ -11,8 +11,4 @@
       <ProjectReference Include="..\DTO\DTO.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Lægehus\" />
-    </ItemGroup>
-
 </Project>

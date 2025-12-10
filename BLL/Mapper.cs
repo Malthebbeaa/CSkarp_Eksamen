@@ -81,7 +81,7 @@ public class Mapper
             Lægemiddel = ordination.Lægemiddel,
             Dosis = ordination.Dosis,
             AntalUdleveringer = ordination.AntalUdleveringer,
-            AntalForetagedeUdleveringer = ordination.AntalForetagedeUdleveringer
+            AntalForetagneUdleveringer = ordination.AntalForetagneUdleveringer
         };
     }
     public static Ordination Map(OrdinationDTO ordinationDto)
@@ -92,7 +92,7 @@ public class Mapper
             Lægemiddel = ordinationDto.Lægemiddel,
             Dosis = ordinationDto.Dosis,
             AntalUdleveringer = ordinationDto.AntalUdleveringer,
-            AntalForetagedeUdleveringer = ordinationDto.AntalForetagedeUdleveringer
+            AntalForetagneUdleveringer = ordinationDto.AntalForetagneUdleveringer
         };
     }
 
