@@ -20,7 +20,11 @@ public partial class MainWindow : Window
 
     private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
     {
-        await HentLaegehuseAsync();
+        var lægehuse = await HentLægehuseAsync();
+
+        if (lægehuse == null) SætLægehusListBox(new string[] { "Ingen lægehuse fundet" });
+        
+        SætLægehusListBox(lægehuse);
     }
 
     private async void Button_OnClick(object? sender, RoutedEventArgs e)
@@ -28,11 +32,15 @@ public partial class MainWindow : Window
         var ydernummer = Searchbar.Text;
         if (string.IsNullOrWhiteSpace(ydernummer))
         {
-            Huse.ItemsSource = new string[] { "Ingen lægehuse med dette ydernummer" };
+            SætLægehusListBox(new string[] { "Ingen lægehuse med dette ydernummer" });
         }
         else
         {
-            await HentLægeHusAsync(ydernummer);
+            var lægehus = await HentLægeHusAsync(ydernummer);
+            
+            if (lægehus == null) SætLægehusListBox(new string[] { "Ingen lægehuse med dette ydernummer" });
+
+            SætLægehusListBox([lægehus]);
         }
     }
 
@@ -43,43 +51,40 @@ public partial class MainWindow : Window
 
     private void OpretReceptBtn_OnClick(object? sender, RoutedEventArgs e)
     {
-        var formWindow = new ReceptForm((LægehusDTO) Huse.SelectedItem);
+        var formWindow = new ReceptForm((LægehusDTO)Huse.SelectedItem);
         formWindow.Show();
         this.Close();
     }
 
-    private async Task HentLægeHusAsync(string ydernummer)
+    private async Task<LægehusDTO?> HentLægeHusAsync(string ydernummer)
     {
         HttpClient client = new HttpClient();
         var response = await client.GetAsync($"http://localhost:5027/api/ReceptSystems/laegehuse/{ydernummer}");
 
         if (!response.IsSuccessStatusCode)
         {
-            Huse.ItemsSource = new string[] { "Ingen lægehuse med dette ydernummer" };
+            return null;
         }
-        else
+
+        string json = await response.Content.ReadAsStringAsync();
+
+        var options = new JsonSerializerOptions
         {
-            string json = await response.Content.ReadAsStringAsync();
+            PropertyNameCaseInsensitive = true
+        };
 
-            var options = new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true
-            };
-
-            var lægehusFraAPI = JsonSerializer.Deserialize<LægehusDTO>(json, options);
-            Huse.ItemsSource = new []{lægehusFraAPI};
-        }
+        var lægehus = JsonSerializer.Deserialize<LægehusDTO>(json, options);
+        return lægehus;
     }
 
-    private async Task HentLaegehuseAsync()
+    private async Task<List<LægehusDTO>?> HentLægehuseAsync()
     {
         HttpClient client = new HttpClient();
         var response = await client.GetAsync($"http://localhost:5027/api/ReceptSystems/laegehuse");
 
         if (!response.IsSuccessStatusCode)
         {
-            Huse.ItemsSource = new string[] { "Ingen lægehuse med dette ydernummer" };
-            return;
+            return null;
         }
 
         string json = await response.Content.ReadAsStringAsync();
@@ -91,6 +96,11 @@ public partial class MainWindow : Window
 
         var lægehuse = JsonSerializer.Deserialize<List<LægehusDTO>>(json, options);
 
-        Huse.ItemsSource = lægehuse;
+        return lægehuse;
+    }
+
+    private void SætLægehusListBox(IEnumerable<object> list)
+    {
+        Huse.ItemsSource = list;
     }
 }
